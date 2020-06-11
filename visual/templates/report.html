@@ -1,0 +1,287 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-responsive">
+    <!-- Navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg py-3 navbar-light bg-light shadow-sm">
+            <div class="container"><a href="#" class="navbar-brand text-uppercase font-weight-bold">OSINT DEMO</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="#" class="nav-link">Report <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="https://github.com/Bkgyihong1/myrepo" class="nav-link">Source</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Intelligence Report Heading-->
+    <div class="row">
+        <div class="col mx-auto text-center">
+          <h1 class="display-4">FINAL INTELLIGENCE REPORT</h1>
+          <p class="lead mb-0"> This intelligence report is based off the exploitation of information legally available in the public domain.<br></p>
+        </div>
+    </div>
+
+    <!--Instagram recent posts-->
+    <div class="row">
+        <div class="col-lg-9 mx-auto text-center">
+            <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Recent Instagram Post Gallery</h1>
+            <hr class="mt-2 mb-5">
+              <div class="row text-center text-lg-left">
+                  <div class="row">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_0.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_1.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_2.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_3.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_4.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_5.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_6.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_7.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_8.jpg')}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='picture_9.jpg')}}">
+                  </div>
+              </div>
+        </div>
+    </div>
+
+    <!-- Intelligence content-->
+    <div class="row">
+
+        <!-- Intelligence Results-->
+        <div class="col" align="center">
+            <div class="col-lg-9 mx-auto text-center">
+                <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Intelligence Results</h1>
+                <hr class="mt-2 mb-5">
+            </div>
+            <!-- Accordion -->
+          <div class="row">
+            <div class="col-lg-9 mx-auto">
+            <div id="accordionExample" class="accordion shadow">
+
+                <!-- Accordion item 1 -->
+                <!-- Biography -->
+                <div class="card">
+                  <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+                    <h2 class="mb-0 font-weight-bold">
+                        <button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">Background Knowledge</button>
+                    </h2>
+                  </div>
+                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                        <div class="card-body p-5">
+                            {% if bio == 0 and edu == 0 and exp == 0 and interest == 0 and skill == 0 %}
+                            <p class="font-weight-light m-0">
+                            No personal content obtained.
+                            </p>
+                            {% else %}
+                                <p class="font-weight-light m-0">
+                                    {% for bio in bio %}
+                                    Name: {{ bio.Name }}<br>
+                                    Current location: {{ bio.Location }}<br>
+                                    Current Career Position: {{ bio.Position }}<br>
+                                    LinkedIn Connections: {{ bio.Connnections }}<br>
+                                    {% endfor %}
+
+                                </p>
+
+                                <!-- education and experience -->
+                                <div class="row text-center">
+                                    <div class="col mx-auto">
+                                        <h5>EDUCATION BACKGROUND:</h5>
+                                        {% if edu == 0 %}
+                                        <p class="font-weight-light m-0">
+                                            No Education background collected
+                                        </p>
+                                        {% else %}
+                                        <p class="font-weight-light m-0">
+                                        {% for edu in edu %}
+                                        School attended: {{ edu.school }}<br>
+                                        Studied: {{ edu.major }}<br>
+                                        School Duration: {{ edu.Time }}<br><br>
+                                        {% endfor %}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col mx-auto">
+                                        <h5>WORK EXPERIENCE:</h5>
+                                        {% if exp == 0 %}
+                                        <p class="font-weight-light m-0">
+                                            No experience background collected
+                                        </p>
+                                        {% else %}
+                                        <p class="font-weight-light m-0">
+                                        {% for exp in exp %}
+                                        Work Position: {{ exp.Position }}<br>
+                                        Company Name: {{ exp.Company }}<br>
+                                        Work Duration: {{ exp.Time }}<br><br>
+                                        {% endfor %}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            <!-- Interests and skills -->
+                                <div class="row text-center">
+                                    <div class="col mx-auto">
+                                        <h5>Publicized Interests:</h5>
+                                        {% if interest == 0 %}
+                                        <p class="font-weight-light m-0">
+                                            No self proclaimed interests collected
+                                        </p>
+                                        {% else %}
+                                        <p class="font-weight-light m-0">
+                                        {% for interest in interest %}
+                                            {{ interest }}
+                                        {% endfor %}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col mx-auto">
+                                        <h5>Publicized Skills:</h5>
+                                        {% if skill == 0 %}
+                                        <p class="font-weight-light m-0">
+                                            No self proclaimed skills collected
+                                        </p>
+                                        {% else %}
+                                        <p class="font-weight-light m-0">
+                                            {% for skill in skill %}
+                                                {{ skill }}
+                                            {% endfor %}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            <!-- fame results-->
+                            <p class="font-weight-light m-0">
+                                <br>
+                                {{ text }}
+                                <br>
+                                <br>
+                                {{ presence }}
+                                <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+
+                <!-- Accordion item 2 -->
+                <!-- Behavioural results -->
+                <div class="card">
+                  <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                    <h2 class="mb-0">
+                            <button type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="btn btn-link collapsed text-dark font-weight-bold text-uppercase collapsible-link">Post Analysis Results</button>
+                        </h2>
+                  </div>
+                  <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
+                    <div class="card-body p-5">
+                        <br><p class="font-weight-light m-0">
+                        Over the tweets often tweeted by the target, we noted an emotional polarity indicated in the graph below.<br>
+                        Note that 0 is the lowest with 1 the highest i.e most positive outlook on life.
+                        </p>
+                        <br><img class="img-fluid img-thumbnail" src="{{url_for('static', filename='Polarity Change.png')}}">
+                        <p class="font-weight-light m-0">
+                            <br>In most cases, the user tweets along the lines of:
+                        </p>
+                        <br><img class="img-fluid img-thumbnail" src="{{url_for('static', filename='wordcloud.png')}}">
+                        <p class="font-weight-light m-0">
+                            <br>The size of the words indicated is directly proportional to the number of times the target uses these words.<br>
+                            With most tweets engaging in the the topics of:
+                        </p>
+                        <br><img class="img-fluid img-thumbnail" src="{{url_for('static', filename='topic_wordcloud.png')}}">
+                        <p class="font-weight-light m-0">
+                            <br>Therefore, on average the overall sentiment shift of the target is:
+                        </p>
+                        <br><img class="img-fluid img-thumbnail" src="{{url_for('static', filename='Overall_sentiment.png')}}">
+                    </div>
+                    </div>
+                </div>
+                <!-- End -->
+
+
+                <!-- Accordion item 3 -->
+                <!-- Target presence results -->
+                <div class="card">
+                    <div id="headingThree" class="card-header bg-white shadow-sm border-0">
+                        <h2 class="mb-0">
+                            <button type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="btn btn-link collapsed text-dark font-weight-bold text-uppercase collapsible-link">Target Occurence</button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">
+                        <div class="card-body p-5">
+                            {% if online == 0 and loc == 0 %}
+                            <p class="font-weight-light m-0">
+                                <br>Sorry, wasn't able to collect intelligence related to the target's location or online presence.
+                            </p>
+
+                            {% else%}
+                            {% if online == 0 %}
+                            <p class="font-weight-light m-0">
+                                Sorry, no time management intelligence collected
+                            </p>
+                            {% else %}
+                            <p class="font-weight-light m-0">
+                                <br>From the data analyzed; the scatter graph presents the possible times of day when the target is usually online.
+                                Please note that this is calculated in relation to your timezone and not the target's timezone.<br>
+                                The x- axis represents the 24 hours in a day and the y-axis represents the date when the target posted
+                            </p>
+                            <br>
+                            <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='Post Timing.png')}}">
+                            {% endif %}
+
+                            {% if loc == 0 %}
+                            <p class="font-weight-light m-0">
+                                Sorry, no location intelligence available
+                            </p>
+                            {% else %}
+                            <p class="font-weight-light m-0">
+                                <br>Target is possibly located in :
+                            </p>
+                            <br><img class="img-fluid img-thumbnail" src="{{url_for('static', filename='loc_wordcloud.png')}}">
+                            <p class="font-weight-light m-0">
+                            <br>For more accurancy, refer to the <a href="#">location map</a>.
+                            </p>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+            <!-- End -->
+
+            </div>
+          </div>
+          </div>
+
+        </div>
+
+    </div>
+    <!-- Ending statement for help -->
+    <div class="row">
+        <div class="col-lg-9 mx-auto text-center">
+            <br><p>
+                Please note that this project is strictly for educational purposes and still under development.
+                In case you are interested in contributing to this project<br>
+                please refer <a href="https://github.com/Bkgyihong1/myrepo">here</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted">© 2020 Kembabazi Barbara Gamukama Yihong Original OSINT Project.</p>
+      </div>
+    </div>
+    </footer>
+
+  <!-- End -->
+</div>
+</body>
+</html>
+{% endblock content %}

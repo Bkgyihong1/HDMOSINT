@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+     <title>Location</title>
+    <!-- 本地 -->
+    <script src="../Build/Cesium/Cesium.js"></script>
+    <script src="./Sandcastle/Sandcastle-header.js"></script>
+    <!-- <script src="qwebchannel.js"></script> -->
+    <!-- <script src="MoveEntity.js"></script> -->
+    <!-- <script src="jquery-3.5.0.min.js"></script> -->
+</head>
+<style>
+     @import url(../Build/Cesium/Widgets/widgets.css);
+     html, body, #cesiumContainer {
+         width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+     }
+</style>
+
+<body>
+      <div id="cesiumContainer"></div>
+      <div id="toolbar" style="margin: 5px;padding: 2px 5px;position: absolute;top:50px"></div>
+      <script>
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzYWUxOTRhMC1hNGY4LTRhZjQtODY5Mi00ODVhZjIxY2UxYTciLCJpZCI6Mjc0MzIsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyIsInByIl0sImlhdCI6MTU4OTQ3MTc0OX0.21zAWwIXd3ccRNNLnUcdoKxNNfjUoDsrWSnLRJ__UBE'
+  var viewer = new Cesium.Viewer("cesiumContainer", {
+    selectionIndicator: false,
+    infoBox: false,
+    terrainProvider: Cesium.createWorldTerrain(),
+  });
+
+  var allCoordinates = ["0.31169125,32.57379505656587", "-15.983504,-47.834309", "0.2051596,32.5967298", "0.0679483,32.4746135", "0.3177137,32.5813539", "0.3177137,32.5813539", "0.33553239999999995,32.56820090052173", "-3.0969194,26.9478417"]
+    // Parses a single coordinate into an object of X and Y cooordinates
+    function parseCoordinate(coordinate) {
+      var chunks = coordinate.split(',');
+      return {
+        x: parseFloat(chunks.shift()),
+        y: parseFloat(chunks.join(' '))
+      };
+    }
+
+    // Parses all into a single array
+    function parseAllCoordinates(coordinates) {
+      var finalCoordinates = []
+
+      for(var i = 0; i < coordinates.length; i++) {
+        finalCoordinates.push(parseCoordinate(coordinates[i]))
+      }
+
+      return finalCoordinates
+    }
+
+    const coordinates = parseAllCoordinates(allCoordinates)
+
+    // Add coordinates to Cesium
+    for (let j = 0; j < coordinates.length; j++) {
+      viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(coordinates[j].y, coordinates[j].x),
+      billboard: {
+        image: "./Sandcastle/images/Cesium_Logo_overlay.png",
+      },
+    });
+    }
+    </script>
+</body>
+
+</html>
