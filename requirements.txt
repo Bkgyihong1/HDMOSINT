@@ -55,7 +55,7 @@ mkl-service==2.3.0
 more-itertools==8.2.0
 ndg-httpsclient==0.5.1
 nltk==3.4.4
-numpy==1.18.1
+numpy==1.22.0
 oauthlib==3.1.0
 olefile==0.46
 packaging==20.3
